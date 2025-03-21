@@ -1,15 +1,15 @@
-import { serve } from '@hono/node-server'
-import { Hono } from 'hono'
+import {serve} from '@hono/node-server';
+import {Movie} from './movie-type.js';
+import{Hono} from 'hono';
+import movieRouter from './routes.js';
 
-const app = new Hono()
+const app = new Hono();
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+app.route("/", movieRouter);
 
 serve({
   fetch: app.fetch,
-  port: 3000
-}, (info) => {
-  console.log(`Server is running on http://localhost:${info.port}`)
-})
+  port: 5000,
+});
+
+console.log("Server running at http://localhost:5000");
